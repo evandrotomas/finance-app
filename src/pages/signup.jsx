@@ -52,7 +52,7 @@ const signupSchema = z.object({
 })
 
 const SignupPage = () => {
-  const methods = useForm({
+  const form = useForm({
     resolver: zodResolver(signupSchema),
     defaultValues: {
       firstName: '',
@@ -68,8 +68,8 @@ const SignupPage = () => {
   }
   return (
     <div className="flex h-screen w-screen flex-col items-center justify-center gap-3">
-      <Form {...methods}>
-        <form onSubmit={methods.handleSubmit(handleSubmit)}>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)}>
           <Card className="w-[500px] text-center">
             <CardHeader>
               <CardTitle>Crie a sua conta</CardTitle>
@@ -78,7 +78,7 @@ const SignupPage = () => {
             <CardContent className="space-y-1">
               {/* PRIMEIRO NOME */}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="firstName"
                 render={({ field }) => (
                   <FormItem className="space-y-0 text-left">
@@ -92,7 +92,7 @@ const SignupPage = () => {
               />
               {/* ÚLTIMO NOME*/}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="lastName"
                 render={({ field }) => (
                   <FormItem className="space-y-0 text-left">
@@ -106,7 +106,7 @@ const SignupPage = () => {
               />
               {/* E-MAIL */}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem className="space-y-0 text-left">
@@ -120,7 +120,7 @@ const SignupPage = () => {
               />
               {/* SENHA */}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="password"
                 render={({ field }) => (
                   <FormItem className="space-y-0 text-left">
@@ -134,7 +134,7 @@ const SignupPage = () => {
               />
               {/* CONFIRMAÇÃO DE SENHA */}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="passwordConfirmation"
                 render={({ field }) => (
                   <FormItem className="space-y-0 text-left">
@@ -151,7 +151,7 @@ const SignupPage = () => {
               />
               {/* CHECKBOX */}
               <FormField
-                control={methods.control}
+                control={form.control}
                 name="terms"
                 render={({ field }) => (
                   <FormItem className="items-top flex space-x-2 space-y-0">
@@ -165,12 +165,12 @@ const SignupPage = () => {
                     <div className="grid gap-1.5 leading-none">
                       <label
                         htmlFor="terms"
-                        className={`mt-1 text-left text-xs text-muted-foreground opacity-75 ${methods.formState.errors.terms && 'text-red-500'}`}
+                        className={`mt-1 text-left text-xs text-muted-foreground opacity-75 ${form.formState.errors.terms && 'text-red-500'}`}
                       >
                         Ao clicar em &quot;Criar conta&quot;, você aceita{' '}
                         <a
                           href="#"
-                          className={`text-white underline ${methods.formState.errors.terms && 'text-red-500'}`}
+                          className={`text-white underline ${form.formState.errors.terms && 'text-red-500'}`}
                         >
                           nosso termo de uso e política de privacidade.
                         </a>
