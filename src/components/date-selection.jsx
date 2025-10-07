@@ -1,14 +1,32 @@
-import { addMonths } from 'date-fns'
-import { useState } from 'react'
+import { addMonths, format } from 'date-fns'
+import { useEffect, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router'
 
 import { DatePickerWithRange } from './ui/date-picker-with-range'
 
-const DateSelection = () => {
-  const [date, setDate] = useState({
-    from: new Date(),
-    to: addMonths(new Date(), 1),
-  })
+const formatDate = (date) => format(date, 'yyyy-MM-dd')
 
+const DateSelection = () => {
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const [date, setDate] = useState({
+    from: searchParams.get('from')
+      ? new Date(searchParams.get('from') + 'T00:00:00')
+      : new Date(),
+    to: searchParams.get('to')
+      ? new Date(searchParams.get('to') + 'T00:00:00')
+      : addMonths(new Date(), 1),
+  })
+  // sempre que o state "date" mudar, eu preciso persisti-lo na URL (?from&to=)
+  useEffect(() => {
+    // early return
+    if (!date?.from || !date?.to) return
+    const queryParams = new URLSearchParams()
+    queryParams.set('from', formatDate(date.from))
+    queryParams.set('to', formatDate(date.to))
+    navigate(`/?${queryParams.toString()}`)
+  }, [navigate, date])
+  // quanto eu recarregar a página, eu pego a from e to da url e persisto eles o state
   return <DatePickerWithRange value={date} onChange={setDate} />
 }
 
