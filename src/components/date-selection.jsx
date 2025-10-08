@@ -32,7 +32,12 @@ const DateSelection = () => {
     queryParams.set('to', formatDate(date.to))
     navigate(`/?${queryParams.toString()}`)
     queryClient.invalidateQueries({
-      queryKey: ['balance', user.id],
+      queryKey: [
+        'balance',
+        user.id,
+        formatDate(date.from),
+        formatDate(date.to),
+      ],
     })
   }, [navigate, date, queryClient, user.id])
 
