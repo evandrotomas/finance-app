@@ -5,6 +5,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes } from 'react-router'
 
+import { Toaster } from './components/ui/sonner'
 import { AuthContextProvider } from './contexts/auth'
 import HomePage from './pages/home'
 import LoginPage from './pages/login'
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
           </Routes>
         </BrowserRouter>
       </AuthContextProvider>
+      <Toaster />
     </QueryClientProvider>
   </StrictMode>
 )
