@@ -23,7 +23,10 @@ const getInitialDateState = (searchParams) => {
   if (datesAreInvalid) {
     return defaultDate
   }
-  return defaultDate
+  return {
+    from: new Date(from + 'T00:00:00'),
+    to: new Date(to + 'T00:00:00'),
+  }
 }
 
 const DateSelection = () => {
