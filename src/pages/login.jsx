@@ -75,7 +75,7 @@ const LoginPage = () => {
               />
             </CardContent>
             <CardFooter>
-              <Button className="w-full" disable={form.formState.isSubmitting}>
+              <Button className="w-full" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting && (
                   <Loader2Icon className="animate-spin" />
                 )}
