@@ -32,7 +32,7 @@ export const getTransactionsQueryKey = ({ userId, from, to }) => {
   return ['getTransactions', userId, from, toDate]
 }
 
-export const useGetTransations = ({ from, to }) => {
+export const useGetTransactions = ({ from, to }) => {
   const { user } = useAuthContext()
   return useQuery({
     queryKey: getTransactionsQueryKey({ userId: user.id, from, to }),
